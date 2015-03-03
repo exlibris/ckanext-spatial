@@ -132,15 +132,15 @@ this.ckan.module('wmspreview', function (jQuery, _) {
 
           }
 
-          var dummyLayer = new OpenLayers.Layer("Dummy",{
-            "maxExtent": maxExtent,
-            "displayInLayerSwitcher":false,
-            "isBaseLayer":true,
-            "visibility":false,
-            "minScale": (minScale) ? minScale : null,
-            "maxScale": (maxScale) ? maxScale : null
-          });
-          olLayers.push(dummyLayer);
+            var baseLayer = new OpenLayers.Layer.WMS( "Minnesota Composite Imagery",
+              "http://geoint.lmic.state.mn.us/cgi-bin/wmsll",
+              {layers: 'mncomp',//'fsa2010',
+               styles: '',
+               format: 'image/jpeg',
+               version: '1.3.0'},
+              {isBaselayer:true,singleTile:false} );
+          olLayers.push(baseLayer);
+
 
           $("#data-preview").empty();
           $("#data-preview").append($("<div></div>").attr("id","map"));
